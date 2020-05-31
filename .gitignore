@@ -99,4 +99,7 @@ cudnn-*
 nccl_*
 
 # Datasets
-datasets/*
+5_emotions_mobilenet/datasets/*
+5_emotions_vgg/datasets/*
+7_emotions_mobilenet/datasets/*
+7_emotions_vgg/datasets/*
