@@ -101,5 +101,6 @@ nccl_*
 # Datasets
 5_emotions_mobilenet/datasets/*
 5_emotions_vgg/datasets/*
+7_emotions_cnn/datasets/*
 7_emotions_mobilenet/datasets/*
 7_emotions_vgg/datasets/*
