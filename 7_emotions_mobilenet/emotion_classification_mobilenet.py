@@ -108,3 +108,8 @@ history = model.fit_generator(train_generator,
                               callbacks=callbacks,
                               validation_data=validation_generator,
                               validation_steps=nb_validation_samples // batch_size)
+
+model_json = model.to_json()
+
+with open("emotion_classification_vgg_7_emotions.json", "w") as json_file:
+    json_file.write(model_json)

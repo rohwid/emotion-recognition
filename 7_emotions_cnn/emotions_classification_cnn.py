@@ -149,7 +149,7 @@ model.fit(train_x, train_y,
 # Saving the  model to  use it later on
 fer_json = model.to_json()
 
-with open("fer.json", "w") as json_file:
+with open("emotion_classification_cnn_5_emotions.json", "w") as json_file:
     json_file.write(fer_json)
 
-model.save_weights("fer.h5")
+model.save_weights("emotion_classification_cnn_5_emotions.h5")

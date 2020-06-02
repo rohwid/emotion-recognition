@@ -149,5 +149,5 @@ history = model.fit_generator(train_generator,
 
 model_json = model.to_json()
 
-with open("model.json", "w") as json_file:
+with open("emotion_classification_vgg_5_emotions.json", "w") as json_file:
     json_file.write(model_json)

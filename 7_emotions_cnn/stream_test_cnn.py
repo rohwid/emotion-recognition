@@ -4,10 +4,10 @@ from keras.models import model_from_json
 from keras.preprocessing import image
 
 # load model
-model = model_from_json(open("fer.json", "r").read())
+model = model_from_json(open("emotion_classification_cnn_5_emotions.json", "r").read())
 
 # load weights
-model.load_weights('fer.h5')
+model.load_weights('emotion_classification_cnn_5_emotions.h5')
 
 face_haar_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
