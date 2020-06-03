@@ -1,12 +1,15 @@
+from __future__ import print_function
+
 import numpy as np
 import pandas as pd
 
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-from keras.losses import categorical_crossentropy
-from keras.optimizers import Adam
-from keras.utils import np_utils
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense, Dropout, Flatten
+from tensorflow.python.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.python.keras.losses import categorical_crossentropy
+from tensorflow.python.keras.optimizers import Adam
+from tensorflow.python.keras.utils import np_utils
+from tensorflow.python.keras.callbacks import TensorBoard
 
 
 def inspect_dataset():
@@ -93,7 +96,7 @@ test_x /= np.std(test_x, axis=0)
 num_features = 64
 num_labels = 7
 batch_size = 64
-epochs = 30
+epochs = 60
 width, height = 48, 48
 
 train_y = np_utils.to_categorical(train_y, num_classes=num_labels)
@@ -133,6 +136,8 @@ model.add(Dense(num_labels, activation='softmax'))
 
 model.summary()
 
+callbacks = TensorBoard(log_dir='./graph')
+
 # Compiling the model
 model.compile(loss=categorical_crossentropy,
               optimizer=Adam(),
@@ -144,7 +149,8 @@ model.fit(train_x, train_y,
           epochs=epochs,
           verbose=1,
           validation_data=(test_x, test_y),
-          shuffle=True)
+          shuffle=True,
+          callbacks=[callbacks])
 
 # Saving the  model to  use it later on
 fer_json = model.to_json()

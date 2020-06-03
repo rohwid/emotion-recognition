@@ -1,14 +1,15 @@
 from __future__ import print_function
 
-from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten, BatchNormalization
-from keras.layers import Conv2D, MaxPooling2D
-
-from keras.optimizers import Adam
-from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
-
 import os
+
+from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense, Dropout, Activation, Flatten, BatchNormalization
+from tensorflow.python.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.python.keras.callbacks import TensorBoard
+
+from tensorflow.python.keras.optimizers import Adam
+from tensorflow.python.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 
 
 num_classes = 7
@@ -130,7 +131,9 @@ reduce_lr = ReduceLROnPlateau(monitor='val_loss',
                               verbose=1,
                               min_delta=0.0001)
 
-callbacks = [early_stop, checkpoint, reduce_lr]
+tensor_board = TensorBoard(log_dir='./graph')
+
+callbacks = [early_stop, checkpoint, reduce_lr, tensor_board]
 
 model.compile(loss='categorical_crossentropy',
               optimizer=Adam(lr=0.001),

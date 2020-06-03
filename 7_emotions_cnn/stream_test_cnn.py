@@ -1,7 +1,10 @@
+from __future__ import print_function
+
 import cv2
 import numpy as np
-from keras.models import model_from_json
-from keras.preprocessing import image
+
+from tensorflow.python.keras.models import model_from_json
+from tensorflow.python.keras.preprocessing import image
 
 # load model
 model = model_from_json(open("emotion_classification_cnn_5_emotions.json", "r").read())

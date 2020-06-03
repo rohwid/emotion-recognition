@@ -1,9 +1,11 @@
-from keras.models import load_model
-from keras.preprocessing.image import img_to_array
+from __future__ import print_function
 
 import os
 import cv2
 import numpy as np
+
+from tensorflow.python.keras.models import load_model
+from tensorflow.python.keras.preprocessing.image import img_to_array
 
 
 dir_path = os.getcwd()

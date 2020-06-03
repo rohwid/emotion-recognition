@@ -1,9 +1,14 @@
-from keras.applications import MobileNet
-from keras.models import Model
-from keras.layers import Dense, GlobalAveragePooling2D
-from keras.preprocessing.image import ImageDataGenerator
+from __future__ import print_function
 
 import os
+
+from tensorflow.python.keras.applications import MobileNet
+from tensorflow.python.keras.models import Model
+from tensorflow.python.keras.layers import Dense, GlobalAveragePooling2D
+from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.python.keras.optimizers import Adam
+from tensorflow.python.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
+from tensorflow.python.keras.callbacks import TensorBoard
 
 
 # MobileNet is designed to work with images of dim 224,224
@@ -70,10 +75,7 @@ validation_generator = validation_data_generator.flow_from_directory(validation_
                                                                      batch_size=batch_size,
                                                                      class_mode='categorical')
 
-from keras.optimizers import Adam
-from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
-
-checkpoint = ModelCheckpoint('emotion_classification_mobile_net_7_emotions.h5',
+checkpoint = ModelCheckpoint('emotion_classification_mobilenet_7_emotions.h5',
                              monitor='val_loss',
                              mode='min',
                              save_best_only=True,
@@ -91,7 +93,9 @@ learning_rate_reduction = ReduceLROnPlateau(monitor='val_acc',
                                             factor=0.2,
                                             min_lr=0.0001)
 
-callbacks = [early_stop, checkpoint, learning_rate_reduction]
+tensor_board = TensorBoard(log_dir='./graph')
+
+callbacks = [early_stop, checkpoint, learning_rate_reduction, tensor_board]
 
 model.compile(loss='categorical_crossentropy',
               optimizer=Adam(lr=0.001),
@@ -111,5 +115,5 @@ history = model.fit_generator(train_generator,
 
 model_json = model.to_json()
 
-with open("emotion_classification_vgg_7_emotions.json", "w") as json_file:
+with open("emotion_classification_mobilenet_7_emotions.json", "w") as json_file:
     json_file.write(model_json)
