@@ -14,7 +14,7 @@ classifier = load_model(dir_path + '/emotion_classification_vgg_7_emotions.h5')
 
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 
 while True:
     # Grab a single frame of video
